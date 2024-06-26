@@ -1,34 +1,32 @@
 require "test_helper"
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
-include AuthHelper
+include Devise::Test::IntegrationHelpers
   
   setup do
     @article = articles(:one)
-    
+    @user = users(:one)
   end
   teardown do
     Rails.cache.clear
   end
 
-  def authorize_user
-    headers = { Authorization: ActionController::HttpAuthentication::Basic.encode_credentials("dhh", "secret") }
-    return headers
-  end
-
   test "should get index" do
+    
     get articles_url
     assert_response :success, "failed to get index url"
   end
 
   test "should get new" do
-    get new_article_url,  headers: authorize_user
+    sign_in @user
+    get new_article_url
     assert_response :success, "failed to get new article url"
   end
 
   test "should create article" do
+    sign_in @user
     assert_difference("Article.count") do
-      post articles_url, params: { article: { title:"Created",body:"testing body" } }, headers: authorize_user
+      post articles_url, params: { article: { title:"Created",body:"testing body" } }
     end
 
     assert_redirected_to article_url(Article.last)
@@ -40,12 +38,14 @@ include AuthHelper
   end
 
   test "should get edit" do
-    get edit_article_url(@article), headers: authorize_user
+    sign_in @user
+    get edit_article_url(@article)
     assert_response :success
   end
 
   test "should update article" do
-    patch article_url(@article), params: { article: {title:"updated" ,body:"testing body",status:"public"} }, headers: authorize_user
+    sign_in @user
+    patch article_url(@article), params: { article: {title:"updated" ,body:"testing body",status:"public"} }
     assert_redirected_to article_url(@article), "failed to redirect to article url after update"
 
     @article.reload
@@ -53,8 +53,9 @@ include AuthHelper
   end
 
   test "should destroy article" do
+    sign_in @user
     assert_difference("Article.count", -1) do
-      delete article_url(@article), headers: authorize_user
+      delete article_url(@article)
     end
 
     assert_redirected_to root_path

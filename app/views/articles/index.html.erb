@@ -1,5 +1,9 @@
 <h1>Articles</h1>
-Our blog has <%= Article.public_count%> articles and counting!
+<% unless @articles.count <1%>
+    Our blog has <%= Article.public_count%> article<%unless @articles.count==1 %>s<%end%> and counting!
+<% else%>
+    Our blog has <%= Article.public_count%> articles :(
+<%end%>
 <ul>
     <% @articles.each do |article| %>
     <% unless article.archived?%>
@@ -10,3 +14,11 @@ Our blog has <%= Article.public_count%> articles and counting!
     <% end %>  
 </ul>
 <%= link_to "New Article", new_article_path%>
+<%if current_user%>
+    <li><%= link_to "Sign Out", destroy_user_session_path, data:{
+        turbo_method: :delete
+    }%></li>
+<% else%>
+    <li><%= link_to "Sign Up", new_user_registration_path%></li>
+    <li><%= link_to "Sign In", new_user_session_path%></li>
+<%end%>

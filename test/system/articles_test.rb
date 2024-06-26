@@ -3,6 +3,7 @@ require "application_system_test_case"
 class ArticlesTest < ApplicationSystemTestCase
   setup do
     @article = articles(:one)
+    
   end
   
   test "visiting the index" do
@@ -29,11 +30,8 @@ class ArticlesTest < ApplicationSystemTestCase
   end
 
   test "should destroy Article" do
-    url_with_auth( article_url(@article))
-    #accept_confirm do
-    #click_on "Destroy"
-    #end
-    visit_with_auth("Destroy")
+    url_with_auth(article_url(@article))
+    click_link("Destroy") 
     assert_text "Articles"
   end
 end

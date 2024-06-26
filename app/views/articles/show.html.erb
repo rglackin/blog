@@ -5,13 +5,18 @@
     <li><%= link_to "Edit", edit_article_path(@article)%></li>
     <li><%= link_to "Destroy", article_path(@article), data:{
         turbo_method: :delete,
-        #turbo_confirm: :"Are you sure?"
+        turbo_confirm: :"Are you sure?"
     }
     %></li>
 </ul>
 
 <h2>Comments</h2>
+<%unless @article.comments.count<1%>
 <%= render @article.comments%>
+<% else%>
+<p>No comments yet</p>
+<%end%>
 
 <h2>Add a comment:</h2>
 <%= render 'comments/form'%>
+<%= render 'shared/back_button', back_path: root_path%>
