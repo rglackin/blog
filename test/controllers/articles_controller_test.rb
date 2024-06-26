@@ -1,8 +1,11 @@
 require "test_helper"
 
 class ArticlesControllerTest < ActionDispatch::IntegrationTest
+include AuthHelper
+  
   setup do
     @article = articles(:one)
+    
   end
   teardown do
     Rails.cache.clear
