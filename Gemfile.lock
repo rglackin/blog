@@ -265,6 +265,8 @@ DEPENDENCIES
   devise (~> 4.9)
   importmap-rails
   jbuilder
+  net-pop
+  net-protocol
   pagy (~> 8.6)
   pg
   puma (>= 5.0)
