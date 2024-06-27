@@ -2,12 +2,14 @@ class ArticlesController < ApplicationController
   #http_basic_authenticate_with name: "dhh", password: "secret", except: [:index, :show]
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  after_action :verify_authorized, except: [:index, :show]
+  #after_action :verify_policy_scoped, only: [:index, :show]
   def index
-    @articles = Article.all
+    @pagy ,@articles = pagy(policy_scope(Article))
   end
 
   def show
-    #@article = Article.find(params[:id])
+    @article = policy_scope(Article).find(params[:id])
   end
 
   def new

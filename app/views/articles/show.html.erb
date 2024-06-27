@@ -13,7 +13,7 @@
 
 <h2>Comments</h2>
 <%unless @article.comments.count<1%>
-<%= render @article.comments%>
+<%= render policy_scope(@article.comments)%>
 <% else%>
 <p>No comments yet</p>
 <%end%>

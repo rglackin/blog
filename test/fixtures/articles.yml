@@ -4,8 +4,10 @@ one:
   title: First Article
   body: This is the first article
   status: public
+  user: one
 
 two:
   title: Second Article
   body: This is the second article
   status: public
+  user: two

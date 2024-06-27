@@ -2,8 +2,9 @@ require "test_helper"
 
 class CommentTest < ActiveSupport::TestCase
   def setup
-    @article = Article.create(title: "Test Article", body: "This is a test.")
-    @comment = Comment.new(body: "Test comment", article: @article)
+    @article = articles(:two)
+    @comment = comments(:two)
+    @user = users(:two)	
   end
 
   test "comment should be valid" do
@@ -23,4 +24,13 @@ class CommentTest < ActiveSupport::TestCase
   test "comment should belong to an article" do
     assert_equal @article, @comment.article
   end
+
+  test "user should be present" do
+    @comment.user = nil
+    assert_not @comment.valid?
+  end
+  test "comment should belong to a user" do
+    assert_equal @user, @comment.user
+  end
+  
 end

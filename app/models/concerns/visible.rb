@@ -9,9 +9,15 @@ module Visible
         def public_count
             where(status: 'public').count
         end
+        def archived_count
+            where(status: 'archived').count
+        end
     end
 
     def archived?
         status == 'archived'
+    end
+    def private? 
+        status == 'private'
     end
 end

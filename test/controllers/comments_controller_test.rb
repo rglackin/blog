@@ -3,16 +3,16 @@ require "test_helper"
 class CommentsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   setup do
+    @user = users(:one)
     @article = articles(:one)
     @comment = comments(:one)
-    @user = users(:one)
   end
 
   test "should create comment" do
+    sign_in @user
     assert_difference("Comment.count") do
-      post article_comments_url(@article), params: { comment: {body:"New comment content",article_id: @article.id  } }
+      post article_comments_url(@article), params: { comment: {body:"New comment content",article_id: @article.id, user_id: @user.id  } }
     end
-
     assert_redirected_to article_url(@article)
   end
 

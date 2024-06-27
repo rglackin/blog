@@ -1,11 +1,30 @@
 class CommentPolicy < ApplicationPolicy
-  def update?
-    
+  def is_article_author 
+    user == record.article.user
   end
+  def is_comment_author
+    user == record.user
+  end
+  def create?
+    user!=nil
+  end
+  def destroy?
+    user == is_comment_author || user.admin || is_article_author
+  end
+
   class Scope < ApplicationPolicy::Scope
-    # NOTE: Be explicit about which records you allow access to!
-    # def resolve
-    #   scope.all
-    # end
+    def resolve
+      if user && user.admin
+        scope.all
+      elsif user
+        scope.where(user_id: user.id).or(scope.where(status: 'public'))
+      else
+        scope.where(status: 'public')
+      end
+    end
+    private
+    def policy
+      @policy ||= CommentPolicy.new(user, scope)
+    end
   end
 end

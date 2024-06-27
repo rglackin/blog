@@ -1,24 +1,28 @@
 <h1>Articles</h1>
 <% unless @articles.count <1%>
-    Our blog has <%= Article.public_count%> article<%unless @articles.count==1 %>s<%end%> and counting!
+    Showing <%= @articles.count%>/<%= Article.count%> articles
 <% else%>
-    Our blog has <%= Article.public_count%> articles :(
+    Our blog has <%= @articles.count%> articles :(
 <%end%>
+
 <ul>
     <% @articles.each do |article| %>
-    <% unless article.archived?%>
         <li>
             <%= link_to article.title, article %>
+            <%if article.archived?%>(Archived)<%end%>
+            <%if article.private?%>(Private)<%end%>
         </li>
         <% end%>
-    <% end %>  
 </ul>
+<%== pagy_nav(@pagy)%>
+
 <%= link_to "New Article", new_article_path%>
+
 <%if current_user%>
     <li><%= link_to "Sign Out", destroy_user_session_path, data:{
         turbo_method: :delete
     }%></li>
 <% else%>
-    <li><%= link_to "Sign Up", new_user_registration_path%></li>
     <li><%= link_to "Sign In", new_user_session_path%></li>
+    <li><%= link_to "Sign Up", new_user_registration_path%></li>
 <%end%>

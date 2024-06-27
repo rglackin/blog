@@ -4,8 +4,8 @@ class ArticlesControllerTest < ActionDispatch::IntegrationTest
 include Devise::Test::IntegrationHelpers
   
   setup do
-    @article = articles(:one)
     @user = users(:one)
+    @article = articles(:one)
   end
   teardown do
     Rails.cache.clear

@@ -1,8 +1,10 @@
 class CommentsController < ApplicationController
-    #http_basic_authenticate_with name: "dhh", password: "secret", only: :destroy
-     before_action :authenticate_user!, only: :destroy
+    before_action :authenticate_user!, only: :destroy
+    after_action :verify_authorized
     def create
+
         @article = Article.find(params[:article_id])
+        authorize @article
         @comment = @article.comments.new(comment_params)
         @comment.user_id = current_user.id
         @comment.save
@@ -11,6 +13,7 @@ class CommentsController < ApplicationController
     def destroy
         @article = Article.find(params[:article_id])
         @comment = @article.comments.find(params[:id])
+        authorize @comment
         @comment.destroy
         redirect_to article_path(@article), status: :see_other
     end
