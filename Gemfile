@@ -71,3 +71,5 @@ gem "pundit", "~> 2.3"
 gem 'pagy', '~> 8.6' # omit patch digit
 gem 'net-protocol'
 gem 'net-pop'
+
+gem "tailwindcss-rails", "~> 2.6"

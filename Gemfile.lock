@@ -142,7 +142,7 @@ GEM
       date
       net-protocol
     net-pop (0.1.2)
-      net-protocol (>= 0)
+      net-protocol
     net-protocol (0.2.2)
       timeout
     net-smtp (0.5.0)
@@ -229,6 +229,10 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.1)
     strscan (3.1.0)
+    tailwindcss-rails (2.6.1-x64-mingw-ucrt)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.6.1-x86_64-linux)
+      railties (>= 7.0.0)
     thor (1.3.1)
     timeout (0.4.1)
     turbo-rails (2.0.5)
@@ -276,6 +280,7 @@ DEPENDENCIES
   selenium-webdriver
   sprockets-rails
   stimulus-rails
+  tailwindcss-rails (~> 2.6)
   turbo-rails
   tzinfo-data
   web-console
