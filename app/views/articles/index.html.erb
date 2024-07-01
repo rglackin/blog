@@ -1,7 +1,6 @@
 <div class="max-w-4xl mx-auto px-4">
   <h1 class="text-3xl font-bold mb-4">Articles</h1>
   <% unless @articles.empty? %>
-    <p>Showing <%= @articles.count %> articles </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
       <% @articles.each do |article| %>
         <%= link_to article, class: "block  bg-white shadow-lg p-6 text-center text hover:bg-gray-100" do %>
@@ -17,6 +16,7 @@
         <% end %>
       <% end %>
     </div>
+    <p>Showing <%= @articles.count %> out of <%= @total_articles%> articles </p>
   <% else %>
     <p>Our blog has <%= @articles.count %> articles :(</p>
   <% end %>
