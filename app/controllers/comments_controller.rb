@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
-    before_action :authenticate_user!, only: :destroy
+    before_action :authenticate_user!, only: [:destroy, :create]
+    
     after_action :verify_authorized
     def create
 

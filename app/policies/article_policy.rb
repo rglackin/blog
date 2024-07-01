@@ -12,17 +12,17 @@ class ArticlePolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     def resolve
-      # allow admin to see all posts
+      base_scope = scope.order(created_at: :desc)
       if user && user.admin
-        scope.all
+        # allow admin to see all posts
+        base_scope.all
       elsif user
-        # users can see all non public posts they own  
-        scope.where(status: 'public').or(scope.where(user_id: user.id))
+        # users can see all posts they own and all public posts  
+        base_scope.where(status: 'public').or(base_scope.where(user_id: user.id))
       else
-        # other users only see public posts
-        scope.where(status: 'public')
+        # if not logged in only see public posts
+        base_scope.where(status: 'public')
       end
     end
-    #dont allow anyone unathorized to browse to see non public posts
   end
 end

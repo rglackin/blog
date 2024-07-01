@@ -7,6 +7,7 @@ class ArticlesController < ApplicationController
   def index
     
     @pagy ,@articles = pagy(policy_scope(Article), items:12)
+    @total_articles = @pagy.count
   end
 
   def show
