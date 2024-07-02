@@ -9,7 +9,9 @@ class CommentPolicy < ApplicationPolicy
     user!=nil
   end
   def destroy?
-    user == is_comment_author || user.admin || is_article_author
+    unless user == nil then 
+      user ==  is_comment_author || user.admin || is_article_author
+    end
   end
 
   class Scope < ApplicationPolicy::Scope

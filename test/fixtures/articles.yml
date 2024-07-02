@@ -11,3 +11,15 @@ two:
   body: This is the second article
   status: public
   user: two
+
+three:
+  title: Third Article
+  body: This is the 3rd article
+  status: public
+  user: one
+
+four:
+  title: Fourth Article
+  body: This is the 4th article
+  status: public
+  user: two
