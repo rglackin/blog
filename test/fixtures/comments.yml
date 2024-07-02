@@ -8,4 +8,14 @@ one:
 two:
   user: two
   body: MyText
+  article: one
+
+three:
+  user: one
+  body: MyText
+  article: two
+
+four:
+  user: two
+  body: MyText
   article: two
