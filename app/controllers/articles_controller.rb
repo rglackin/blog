@@ -5,7 +5,6 @@ class ArticlesController < ApplicationController
   after_action :verify_authorized, except: [:index, :show]
   #after_action :verify_policy_scoped, only: [:index, :show]
   def index
-    
     @pagy ,@articles = pagy(policy_scope(Article), items:12)
     @total_articles = @pagy.count
   end

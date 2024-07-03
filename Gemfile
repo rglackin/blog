@@ -74,3 +74,4 @@ gem 'net-protocol'
 gem 'net-pop'
 
 gem "tailwindcss-rails", "~> 2.6"
+gem 'rails-controller-testing'
