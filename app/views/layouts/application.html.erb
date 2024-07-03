@@ -10,8 +10,8 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-  <body>
-    <header>
+  <body class="dark:bg-gray-900">
+    <header >
       <!--bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600-->
       <nav class="bg-gray-50 px-4 lg:px-6 py-2.5 dark:bg-gray-800 fixed w-full z-20 top-0 start-0 border-b-2 dark:border-b-0  ">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
@@ -54,17 +54,17 @@
           </div>
         </div>
       </nav>
+    </header>
+    <main class="bg-white dark:bg-gray-900 dark:text-gray-500" >
       <% if notice%>
         <p class="notice bg-green-100 text-green-800 text-sm py-2 px-4 rounded-lg mt-20"><%= notice %></p>
       <%end%>
       <% if alert%>
-        <p class="alert bg-red-100 text-red-800 text-sm py-2 px-4 rounded-lg mt-20"><%= alert %></p>
+        <p class="alert bg-red-100 text-red-800 text-sm py-2 px-4 rounded-lg mt-20 dark:bg-red-300"><%= alert %></p>
       <%end%>
-    </header>
-    <main class="bg-white dark:bg-gray-900 dark:text-gray-500" >
       <%= yield %>
     </main>
-    <footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800 border-t-2 dark:border-t-0">
+    <footer class="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800 border-t-2 dark:border-t-0 ">
       <div class="mx-auto max-w-screen-xl text-center">
         <a href="#" class="flex justify-center items-center text-2xl font-semibold text-gray-900 dark:text-white">
           Blog
