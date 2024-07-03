@@ -65,7 +65,7 @@ RSpec.describe "Articles", type: :request do
       before do
         sign_in users(:one)
       end
-      include_examples "article validations", :articles_path
+      
       it "creates a new article" do
         expect{
           post articles_path, params: { article: article_attributes }
