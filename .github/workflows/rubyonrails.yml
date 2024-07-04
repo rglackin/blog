@@ -1,40 +1,53 @@
 name: "Ruby on Rails CI"
+run-name: Test
 on:
-  push:
-    branches: ["master"]
   pull_request:
-    branches: ["master"]
-  workflow_dispatch:
+    branches-ignore:
+      - development
 jobs:
   test:
     runs-on: ubuntu-latest
+
     services:
       postgres:
-        image: postgres:11-alpine
+        image: postgres:14.1
         ports:
-          - "5432:5432"
+          - 5432:5432
         env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
+          POSTGRES_DB: rails_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
       RAILS_ENV: test
-      HOST: localhost:3000
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      # Add or replace dependency steps here
-      - name: Install Ruby and gems
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
+          ruby-version: 3.3.0
           bundler-cache: true
-      # Add or replace database setup steps here
-      - name: Set up database schema
-        run: bin/rails db:schema:load
-      # Add or replace test runners here
-      - name: Run Minitest
-        run: bin/rake
-      - name: Run Rspec
+      - name: Install dependencies
+        env:
+          RAILS_ENV: test
+        run: |
+          bundle install --jobs 4 --retry 3 --path vendor/bundle
+      - name: Preparing database
+        env:
+          # use localhost for the host here because we have specified a container for the job.
+          # If we were running the job on the VM this would be postgres
+          DATABASE_URL: "postgres://postgres:password@localhost:5432/rails_test"
+          RAILS_ENV: test
+        run: bin/rails db:prepare
+      - name: Run tests
+        env:
+          DATABASE_URL: "postgres://postgres:password@localhost:5432/rails_test"
+          RAILS_ENV: test
         run: bundle exec rspec
