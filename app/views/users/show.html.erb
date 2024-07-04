@@ -43,7 +43,21 @@
       <%= render 'articles/list', articles:@articles %>
     </div>
     <div class="hidden w-full" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-      comments
+      <div class="grid gap-8 lg:grid-cols-2 mb-5">
+        <% @comments_by_article.each do |article, comments|%>
+        <article class="p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+          <%=link_to article.title, article_path(article) ,class:"hover:underline mb-1 text-xl font-medium text-gray-900 dark:text-white"%>
+          <%if comments.any?%>
+            <% comments.each do |comment|%>
+              <%= render 'comments/comment', comment:comment%>
+            <%end%>
+          <% else%>
+            <p>This user has not made any comments yet.</p>
+          <%end%>
+          </article>
+        <%end%>
+      </div>
+      <%== pagy_nav(@pagy_comment) if @pagy_comment.pages > 1 %>
     </div>
   </div>
 </div>

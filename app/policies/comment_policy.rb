@@ -16,12 +16,13 @@ class CommentPolicy < ApplicationPolicy
 
   class Scope < ApplicationPolicy::Scope
     def resolve
+      base_scope = scope.order(created_at: :desc)
       if user && user.admin
-        scope.all
+        base_scope.all
       elsif user
-        scope.where(user_id: user.id).or(scope.where(status: 'public'))
+        base_scope.where(user_id: user.id).or(base_scope.where(status: 'public'))
       else
-        scope.where(status: 'public')
+        base_scope.where(status: 'public')
       end
     end
     private
