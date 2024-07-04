@@ -75,3 +75,6 @@ gem 'net-pop'
 
 gem "tailwindcss-rails", "~> 2.6"
 gem 'rails-controller-testing'
+gem 'mailgun-ruby', '~>1.1.11'
+gem 'dotenv-rails', groups: [:development, :test]
+gem 'ffi'

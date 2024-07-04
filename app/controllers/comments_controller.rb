@@ -8,7 +8,10 @@ class CommentsController < ApplicationController
         authorize @article
         @comment = @article.comments.new(comment_params)
         @comment.user_id = current_user.id
-        @comment.save
+        if @comment.save
+
+            NotificationMailer.comment_notification(@article.user, @article, @comment).deliver_later
+        end
         redirect_to article_path(@article)
     end
     def destroy
@@ -22,4 +25,5 @@ class CommentsController < ApplicationController
         def comment_params
             params.require(:comment).permit( :body, :status)
         end
+       
 end
