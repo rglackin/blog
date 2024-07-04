@@ -45,7 +45,8 @@ jobs:
         
       - run: ls
       - name: Ensure bin/rails is executable
-        run: chmod +x bin/rails
+      
+        run: chmod +x ./bin/rails
       - name: Preparing database
         env:
           # use localhost for the host here because we have specified a container for the job.
