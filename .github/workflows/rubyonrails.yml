@@ -42,6 +42,8 @@ jobs:
           RAILS_ENV: test
         run: |
           bundle install --jobs 4 --retry 3 --path vendor/bundle
+        
+      - run: ls
       - name: Ensure bin/rails is executable
         run: chmod +x bin/rails
       - name: Preparing database
