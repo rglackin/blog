@@ -42,17 +42,13 @@ jobs:
           RAILS_ENV: test
         run: |
           bundle install --jobs 4 --retry 3 --path vendor/bundle
-        
-      - run: which rails
-      - name: Ensure bin/rails is executable
-        run: chmod +x $(which rails)
       - name: Preparing database
         env:
           # use localhost for the host here because we have specified a container for the job.
           # If we were running the job on the VM this would be postgres
           DATABASE_URL: "postgres://postgres:password@localhost:5432/rails_test"
           RAILS_ENV: test
-        run: $(which rails) db:prepare
+        run: bundle exec rails db:prepare
       - name: Run tests
         env:
           DATABASE_URL: "postgres://postgres:password@localhost:5432/rails_test"
