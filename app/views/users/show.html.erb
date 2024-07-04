@@ -24,7 +24,7 @@
       <h1 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"><%=@user.name.capitalize%></h1>
       <span class="text-sm text-gray-500 dark:text-gray-400">Joined <%= @user.created_at.strftime("%b. %e, %Y") %></span>
       <div class="flex mt-3 md:mt-5">
-        <p class="text-gray-900 dark:text-white text-center">This is a placeholder bio.</p>
+        <p class="text-gray-900 dark:text-white text-center"><%=@user.bio%></p>
       </div>
     </div>
   </div>

@@ -7,7 +7,7 @@
             <%= image_tag 'user-svgrepo-com.svg', alt: 'User Icon' , class:"mr-4 w-16 h-16 rounded-full"%>
             <div>
               <%= link_to @article.user.name.capitalize, user_path(@article.user), class: "text-xl font-bold text-gray-900 dark:text-white hover:underline" %>
-              <p class="text-base text-gray-500 dark:text-gray-400">Bio WIP</p>
+              <p class="text-base text-gray-500 dark:text-gray-400"><%=@article.user.bio%></p>
               <p class="text-base text-gray-500 dark:text-gray-400"><%= @article.created_at.strftime("%b. %e, %Y") %></p>
             </div>
           </div>
