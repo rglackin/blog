@@ -19,6 +19,9 @@
           </a>
           <div class="flex items-center lg:order-2">
             <% if current_user %>
+              <%= link_to user_path(current_user), class:"mx-4 hover:bg-gray-50 dark:hover:bg-gray-700 " do%>
+              <%image_tag 'user-svgrepo-com.svg', alt: 'My Profile', class:"w-5 h-5 "%>
+              <%end%>
               <%= link_to "Sign Out", destroy_user_session_path, class: "text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800", data:{
             turbo_method: :delete} %>
             <% else %>
@@ -54,7 +57,7 @@
         </div>
       </nav>
     </header>
-    <main class="bg-white dark:bg-gray-900 dark:text-gray-500" >
+    <main class="bg-white dark:bg-gray-900 dark:text-gray-500 my-20 " >
       <% if notice%>
         <p class="notice bg-green-100 text-green-800 text-sm py-2 px-4 rounded-lg mt-20"><%= notice %></p>
       <%end%>
