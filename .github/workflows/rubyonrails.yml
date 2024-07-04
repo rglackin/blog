@@ -4,6 +4,9 @@ on:
   pull_request:
     branches-ignore:
       - development
+  push:
+    branches:
+      - main
 jobs:
   test:
     runs-on: ubuntu-latest
