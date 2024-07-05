@@ -9,7 +9,7 @@ class Api::V1::ArticlesController < ApplicationController
         
     end
     def show
-        render json: @article
+        render json: @article, include: ['comments']
     end
 
     
