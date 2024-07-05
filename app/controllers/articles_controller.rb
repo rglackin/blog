@@ -26,7 +26,7 @@ class ArticlesController < ApplicationController
 
   def create
     
-    @article = current_user.articles.create(article_params)
+    @article = current_user.articles.build(article_params)
     authorize @article
     if @article.save
       redirect_to @article
