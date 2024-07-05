@@ -18,9 +18,20 @@
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Blog</span>
           </a>
           <div class="flex items-center lg:order-2">
+            <%= form_with(url: search_articles_path, method: :get, local: true, html:{ class:"max-w-md mx-auto"}) do |form| %>
+              <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                  <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                  </svg>
+                </div>
+              <%= form.text_field :search, placeholder: "Search articles...", class:"block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+             
+              </div>
+            <% end %>
             <% if current_user %>
               <%= link_to user_path(current_user), class:"mx-4 hover:bg-gray-50 dark:hover:bg-gray-700 " do%>
-              <%image_tag 'user-svgrepo-com.svg', alt: 'My Profile', class:"w-5 h-5 "%>
+                <%image_tag 'user-svgrepo-com.svg', alt: 'My Profile', class:"w-5 h-5 "%>
               <%end%>
               <%= link_to "Sign Out", destroy_user_session_path, class: "text-gray-800 dark:text-white hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:hover:bg-gray-700 focus:outline-none dark:focus:ring-gray-800", data:{
             turbo_method: :delete} %>
