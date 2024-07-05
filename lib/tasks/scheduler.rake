@@ -10,7 +10,7 @@ task daily_summary: :environment do
                     NotificationMailer.daily_summary(user, other_articles).deliver
                 rescue => Mailgun::CommunicationError
 
-                    Rails.logger.info "Failed to send email to #{user.email}. Email not authorized."
+                    Rails.logger.warn "Failed to send email to #{user.email}. Email not authorized."
                 end
             end
         end
