@@ -6,4 +6,9 @@ class NotificationMailer < ApplicationMailer
     
         mail(to: @article_author.email, subject: 'New Comment on Your Article')
     end
+    def daily_summary(user, articles)
+        @user = user
+        @articles = articles
+        mail(to: @user.email, subject: 'Daily Summary')
+    end
 end

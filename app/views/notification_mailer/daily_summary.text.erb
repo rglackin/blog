@@ -1,0 +1,10 @@
+Hi <%= @user.name %>,
+
+Here is your daily summary:
+<% @articles.each do |article|%>
+<%=article.title%>- By <%=article.user.name%>
+
+<%end%>
+
+Regards,
+Your Blog Team
