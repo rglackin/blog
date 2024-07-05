@@ -22,7 +22,7 @@
                 <% @articles.each do |article|%>
                   <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                     <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 10px 20px;" valign="top">
-                      <%= link_to "#{article.title}- By #{article.user.name}", article_url(article)%>
+                      <%= link_to "#{article.title} - By #{article.user.name}", article_url(article)%>
                     </td>
                   </tr>
                   <hr>
