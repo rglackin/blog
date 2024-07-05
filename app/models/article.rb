@@ -4,4 +4,6 @@ class Article < ApplicationRecord
     belongs_to :user
     validates :title, presence: true
     validates :body, presence: true, length: {minimum: 10}
+
+    scope :search_by_title, -> (title) { where("title ILIKE ?", "%#{title}%") }
 end
