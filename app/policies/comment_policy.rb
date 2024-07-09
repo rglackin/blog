@@ -3,6 +3,7 @@ class CommentPolicy < ApplicationPolicy
     user == record.article.user
   end
   def is_comment_author
+    byebug
     user == record.user
   end
   def create?
@@ -10,7 +11,7 @@ class CommentPolicy < ApplicationPolicy
   end
   def destroy?
     unless user == nil then 
-      user ==  is_comment_author || user.admin || is_article_author
+      is_comment_author || user.admin || is_article_author
     end
   end
 
