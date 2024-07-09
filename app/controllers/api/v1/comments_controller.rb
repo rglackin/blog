@@ -5,8 +5,8 @@ class Api::V1::CommentsController < ApplicationController
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
     rescue_from NoMethodError, with: :user_not_authorized
     def create
-        authorize @comment
         @comment = @article.comments.new(comment_params)
+        authorize @comment
         @comment.user_id = current_user.id
         if @comment.save
 
