@@ -3,6 +3,7 @@ class Api::V1::CommentsController < ApplicationController
     before_action :set_comment, only: [:destroy]
     skip_before_action :verify_authenticity_token
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+    rescue_from NoMethodError, with: :user_not_authorized
     def create
         authorize @comment
         @comment = @article.comments.new(comment_params)
