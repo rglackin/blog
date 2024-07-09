@@ -1,8 +1,9 @@
 class Api::V1::CommentsController < ApplicationController
     before_action :set_article
     before_action :set_comment, only: [:destroy]
+    rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
     def create
-
+        authorize @comment
         @comment = @article.comments.new(comment_params)
         @comment.user_id = current_user.id
         if @comment.save
@@ -15,6 +16,7 @@ class Api::V1::CommentsController < ApplicationController
         
     end
     def destroy
+        authorize @comment
         if @comment
             @comment.destroy
             render json: {message: 'Comment deleted successfully'}, status: 200
@@ -33,5 +35,8 @@ class Api::V1::CommentsController < ApplicationController
            
             @comment = @article.comments.find(params[:id])
         end
+        def user_not_authorized(exception)
+            render json: { error: "You are not authorized to perform this action." }, status: :unauthorized
+          end
        
 end

@@ -9,7 +9,7 @@ module Api
               devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
           end
           def sign_up_params
-            params.require(:user).permit(:name, :email, :password, :password_confirmation)
+            params.require(:user).permit(:name, :email, :password)
           end
           def create
             
@@ -19,6 +19,7 @@ module Api
               puts "\n-------------\nUser saved\n-----------------\n"
               puts user.inspect
             end
+            
             respond_with(user)
             #super
           end
