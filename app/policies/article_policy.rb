@@ -1,6 +1,7 @@
 class ArticlePolicy < ApplicationPolicy
   
   def new?
+    
     user!=nil
   end
   alias_method :create?, :new?  
