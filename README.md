@@ -8,3 +8,4 @@ Some features of this project:
   - Action Mailer implementation for notifications
   - REST API developed for all actions
   - RSpec testing
+  - Tailwind styling compatible with light and dark modes
